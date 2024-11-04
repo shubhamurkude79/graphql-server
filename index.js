@@ -13,7 +13,7 @@ const typeDefs = gql`
         description: String
         price: Float!
     }
-    type Querry {
+    type Query {
         products: [Product]
         product(id: ID!): Product
     }
