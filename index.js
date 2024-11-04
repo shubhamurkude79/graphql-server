@@ -3,9 +3,10 @@ const express = require('express');
 const { expressMiddleware } = require('@apollo/server/express4');
 const { json } = require('body-parser');
 const cors = require('cors');
+const { gql } = require('graphql-tag');
 
 // Define GraphQL schema
-const typeDefs = `
+const typeDefs = gql`
     type Product {
         id: ID!
         name: String!
