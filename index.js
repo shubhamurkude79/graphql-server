@@ -1,7 +1,11 @@
-const { gql } = require("apollo-server-express");
+const { ApolloServer } = require('@apollo/server');
+const express = require('express');
+const { expressMiddleware } = require('@apollo/server/express4');
+const { json } = require('body-parser');
+const cors = require('cors');
 
 // Define GraphQL schema
-const typeDefs = gql`
+const typeDefs = `
     type Product {
         id: ID!
         name: String!
@@ -15,4 +19,37 @@ const typeDefs = gql`
 `;
 
 // Define resolvers to handle the queries
+const resolvers = {
+    Query: {
+        products: () => [
+            { id: '1', name: 'Laptop', description: 'High performance laptop', price: 999.99 },
+            { id: '2', name: 'Phone', description: 'Latest smartphone', price: 799.99 },
+        ],
+        product: (parent, args) => ({
+            id: args.id, name: 'Sample Product', description: 'Sample Description', price: 123.45 
+        })
+    }
+};
 
+// Initialize Apollo Server v4
+const startServer = async () => {
+    const app = express();
+    const server = new ApolloServer({
+        typeDefs,
+        resolvers
+    });
+    await server.start();
+
+    app.use(
+        '/graphql',
+        cors(),
+        json(),
+        expressMiddleware(server)
+    );
+
+    app.listen(4000, () => {
+        console.log(`🚀 Server ready at http://localhost:4000/graphql`);
+    });
+};
+
+startServer();
