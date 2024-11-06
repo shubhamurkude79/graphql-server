@@ -19,16 +19,17 @@ const typeDefs = gql`
     }
 `;
 
-// Define resolvers to handle the queries
+// List of products as mock data
+const productsList = [
+    { id: '1', name: 'Laptop', description: 'High performance laptop', price: 999.99 },
+    { id: '2', name: 'Phone', description: 'Latest smartphone', price: 799.99 },
+  ];
+
+// Define resolvers to handle the queries 
 const resolvers = {
     Query: {
-        products: () => [
-            { id: '1', name: 'Laptop', description: 'High performance laptop', price: 999.99 },
-            { id: '2', name: 'Phone', description: 'Latest smartphone', price: 799.99 },
-        ],
-        product: (parent, args) => ({
-            id: args.id, name: 'Sample Product', description: 'Sample Description', price: 123.45 
-        })
+        products: () => productsList,
+        product: (parent, args) => productsList.find(product => product.id === args.id)
     }
 };
 
