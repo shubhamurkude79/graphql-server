@@ -31,7 +31,7 @@ const productsList = [
       { id: '2', name: 'Balck Smartwatch', description: 'Another amazing product',
         category: 'Electronics', brand: 'Samsung',
         price: 40000, imageUrl: '/images/electronics/large/black-smartwatch-big.jpg' },
-      { id: '3', name: 'Camer', description: 'Another amazing product',
+      { id: '3', name: 'Camera', description: 'Another amazing product',
         category: 'Electronics', brand: 'Nikon',
         price: 135000, imageUrl: '/images/electronics/large/camera-big.jpg' },
       { id: '4', name: 'Digital Camera', description: 'Another amazing product',
